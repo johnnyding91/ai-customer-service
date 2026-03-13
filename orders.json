@@ -1,0 +1,10 @@
+{
+  "1001": {
+    "status": "Shipped 已发货",
+    "tracking": "SF123456"
+  },
+  "1002": {
+    "status": "Processing 处理中",
+    "tracking": "Pending"
+  }
+}

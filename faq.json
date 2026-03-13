@@ -1,0 +1,12 @@
+[
+  {
+    "question_en": "return policy",
+    "question_zh": "退货",
+    "answer": "You can return products within 7 days. 您可以在7天内退货。"
+  },
+  {
+    "question_en": "shipping time",
+    "question_zh": "配送时间",
+    "answer": "Shipping takes 2-5 days. 配送时间通常2-5天。"
+  }
+]
