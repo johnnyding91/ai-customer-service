@@ -24,31 +24,47 @@ class ChatRequest(BaseModel):
     message:str
     user:str
 
-def search_faq(text):
-    text_lower = text.lower()
+# 简单分词函数（中文按字，英文按空格）
+def tokenize(text):
+    text = text.lower()
+    text = re.sub(r"[^\w\s\u4e00-\u9fff]", "", text)  # 去掉标点
+    words = []
+    for token in text.split():
+        words.append(token)
+    # 中文单字也作为关键词
+    for ch in text:
+        if '\u4e00' <= ch <= '\u9fff':
+            words.append(ch)
+    return set(words)
 
-    # 1️⃣ 精确匹配
+# 搜索 FAQ
+def search_faq(user_text):
+    user_tokens = tokenize(user_text)
+
+    best_match = None
+    best_score = 0
+
     for item in faq:
-        if text_lower == item["question_zh"].lower() or text_lower == item["question_en"].lower():
-            return item["answer"]
+        # FAQ 的关键词
+        faq_text = f"{item['question_zh']} {item['question_en']}"
+        faq_tokens = tokenize(faq_text)
 
-    # 2️⃣ 模糊匹配（尽量多词匹配）
-    for item in faq:
-        q_zh_words = item["question_zh"].lower().split()
-        q_en_words = item["question_en"].lower().split()
+        # 匹配数量 / FAQ 总词数 = 匹配比例
+        match_count = len(user_tokens & faq_tokens)
+        if len(faq_tokens) == 0:
+            continue
+        score = match_count / len(faq_tokens)
 
-        # 中文匹配：至少有2个词匹配
-        zh_matches = sum(1 for word in q_zh_words if word in text_lower)
-        if zh_matches >= 2:
-            return item["answer"]
+        # 保存最高匹配
+        if score > best_score:
+            best_score = score
+            best_match = item
 
-        # 英文匹配：至少有2个词匹配
-        en_matches = sum(1 for word in q_en_words if word in text_lower)
-        if en_matches >= 2:
-            return item["answer"]
-
-    # 3️⃣ 没匹配到
-    return None
+    # 阈值控制，保证不会乱匹配
+    if best_score >= 0.4:  # 匹配比例 >=40% 就认为匹配
+        return best_match["answer"]
+    else:
+        return None
 
 @app.post("/chat")
 def chat(req: ChatRequest):
