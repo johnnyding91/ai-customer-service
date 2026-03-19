@@ -28,10 +28,14 @@ def search_faq(text):
     text = text.lower()
 
     for item in faq:
-        if item["question_zh"] in text or text in item["question_zh"]:
+        q_zh = item["question_zh"].lower()
+        q_en = item["question_en"].lower()
+
+        # 关键词匹配（中文 or 英文）
+        if any(word in text for word in q_zh.split()):
             return item["answer"]
 
-        if item["question_en"].lower() in text or text in item["question_en"].lower():
+        if any(word in text for word in q_en.split()):
             return item["answer"]
 
     return None
