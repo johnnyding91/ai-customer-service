@@ -25,10 +25,14 @@ class ChatRequest(BaseModel):
     user:str
 
 def search_faq(text):
-    text=text.lower()
+    text = text.lower()
+
     for item in faq:
-        if item["question_en"] in text or item["question_zh"] in text:
+        if item["question_zh"] in text:
             return item["answer"]
+        if item["question_en"].lower() in text:
+            return item["answer"]
+
     return None
 
 @app.post("/chat")
