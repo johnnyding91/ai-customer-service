@@ -6998,8 +6998,8 @@
     "question_zh": "购买尼龙齿轮可以使用哪些支付方式？",
     "question_en": "What payment methods are available for purchasing 尼龙齿轮?",
     "answer": "We support bank transfer, credit card, and PayPal for purchasing 尼龙齿轮. 购买尼龙齿轮支持银行转账、信用卡和PayPal支付。"
-  }
-{
+  },
+  {
     "id": 1001,
     "category": "售后",
     "question_zh": "退货",
@@ -7026,5 +7026,5 @@
     "question_zh": "查询订单1000",
     "question_en": "View Order 1000",
     "answer": "Order 1000:Shipped 已发货 Tracking:SF1234568"
-  },
+  }
 ]
