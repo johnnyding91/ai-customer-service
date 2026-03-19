@@ -27,21 +27,15 @@ class ChatRequest(BaseModel):
 def search_faq(text):
     text = text.lower()
 
-    keywords = {
-        "退货": ["退货", "return", "refund"],
-        "物流": ["物流", "发货", "shipping", "delivery"],
-        "支付": ["支付", "付款", "payment"],
-        "产品": ["耐温", "材料", "规格"],
-        "售后": ["质量", "问题", "after sale"]
-    }
-
     for item in faq:
-        cat = item["category"]
+        if item["question_zh"] in text or text in item["question_zh"]:
+            return item["answer"]
 
-        if any(k in text for k in keywords.get(cat, [])):
+        if item["question_en"].lower() in text or text in item["question_en"].lower():
             return item["answer"]
 
     return None
+
 @app.post("/chat")
 def chat(req:ChatRequest):
     message=req.message
