@@ -6999,4 +6999,32 @@
     "question_en": "What payment methods are available for purchasing 尼龙齿轮?",
     "answer": "We support bank transfer, credit card, and PayPal for purchasing 尼龙齿轮. 购买尼龙齿轮支持银行转账、信用卡和PayPal支付。"
   }
+{
+    "id": 1001,
+    "category": "售后",
+    "question_zh": "退货",
+    "question_en": "return policy",
+    "answer": "You can return products within 7 days. 您可以在7天内退货。"
+  },
+  {
+    "id": 1002,
+    "category": "物流",
+    "question_zh": "配送时间",
+    "question_en": "shipping time",
+    "answer": "Shipping takes 2-5 days. 配送时间通常2-5天。"
+  },
+  {
+    "id": 1003,
+    "category": "订单",
+    "question_zh": "查询订单1001",
+    "question_en": "View Order 1001",
+    "answer": "Order 1001:Shipped 已发货 Tracking:SF123456"
+  },
+  {
+    "id": 1004,
+    "category": "订单",
+    "question_zh": "查询订单1000",
+    "question_en": "View Order 1000",
+    "answer": "Order 1000:Shipped 已发货 Tracking:SF1234568"
+  },
 ]
